@@ -64,7 +64,26 @@
                 </div>
               </div>
 
-              <div class="row col-12 justify-center">
+              <div class=" q-py-xs row col-12" v-if="editables[index]">
+                <q-input
+                  clearable
+                  clear-icon="close"
+                  type="textarea"
+                  v-model="data.comment_content"
+                  class="full-width q-pa-none "
+                  color="blue-10"
+                  dense
+                  autogrow
+                  borderless
+                  @keypress.enter="
+                    updateComment($event, data.id, index, data.comment_content)
+                  "
+                />
+              </div>
+              <pre class=" q-py-xs row col-12 q-my-none" v-else>{{
+                data.comment_content
+              }}</pre>
+              <!-- <div class="row col-12 justify-center">
                 <markdown-editor
                   v-if="modes[index] == 'editable'"
                   height="500px"
@@ -92,7 +111,7 @@
                 <q-card-section class="row col-12">
                   <q-markdown :src="info.comment_content"> </q-markdown>
                 </q-card-section>
-              </div>
+              </div> -->
             </q-card>
           </div>
         </div>
@@ -107,9 +126,10 @@ import {
   loadForumItem,
   updateForumComment,
   deleteForumComment,
+  getForumComment,
 } from '@/api/forum';
 import { liquidResolver } from '@/utils/liquidTag';
-import MarkdownEditor from '@/components/common/MarkdownEditor';
+// import MarkdownEditor from '@/components/common/MarkdownEditor';
 
 export default {
   props: {
@@ -117,7 +137,7 @@ export default {
   },
   components: {
     ForumCommentStatus,
-    MarkdownEditor,
+    // MarkdownEditor,
   },
   data() {
     const res = [];
@@ -140,27 +160,46 @@ export default {
       this.modes[index] = 'editable';
       this.modes = [...this.modes];
     },
-    async updateComment(index) {
-      if (this.contents === '') {
-        alert('내용은 필수 입력항목 입니다');
-      }
+    async updateComment(e, comment_pk, index, content) {
+      if (e.shiftKey) return;
       try {
-        const comment_pk = this.info[index].id;
         const postId = this.info[index].post;
-        this.modes[index] = 'preview';
-        this.modes = [...this.modes];
-        this.$q.loading.show();
         await updateForumComment(comment_pk, {
-          comment_content: this.info[index].comment_content,
+          // comment_content: this.info[index].comment_content,
+          comment_content: content,
           post: postId,
-          user: this.author,
+          user: this.$store.state.id,
         });
+
+        this.getComments();
+        this.closeEditor(index);
       } catch (error) {
         console.log(error);
-      } finally {
-        this.$q.loading.hide();
       }
     },
+
+    // async updateComment(index) {
+    //   if (this.info[index].comment_content === '') {
+    //     alert('내용은 필수 입력항목 입니다');
+    //   }
+    //   console.log(this.info)
+    //   try {
+    //     // const comment_pk = this.info[index].id;
+    //     const postId = this.info[index].post;
+    //     this.modes[index] = 'preview';
+    //     this.modes = [...this.modes];
+    //     this.$q.loading.show();
+    //     await updateForumComment(index, {
+    //       comment_content: this.info[index].comment_content,
+    //       post: postId,
+    //       user: this.author,
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     this.$q.loading.hide();
+    //   }
+    // },
     async deleteComment(index) {
       try {
         this.$q.loading.show();
@@ -175,10 +214,12 @@ export default {
     },
   },
   async created() {
-    const index = this.$route.params.id;
+    // const index = this.$route.params.id;
     try {
-      const { data } = await loadForumItem(index);
+      // const { data } = await loadForumItem(index);
+      const { data } = await getForumComment();
       this.contents = data;
+      console.log(this.contents)
       this.author = data.user.id;
     } catch (error) {
       console.log(error);

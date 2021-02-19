@@ -52,6 +52,13 @@ export default {
       shortProfile: '',
     };
   },
+  computed: {
+    createComments() {
+      return {
+        post_id: this.contents.forum_post[0].id,
+      };
+    },
+  },
   async created() {
     const index = this.$route.params.id;
     try {
