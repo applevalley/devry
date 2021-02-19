@@ -5,11 +5,11 @@
         <div class="col-8 row" style="height:100%">
           <q-list style="min-width:300px; margin-left: 30px;">
             <q-item>
-              <q-item-section avatar>
+              <!-- <q-item-section avatar>
                 <q-avatar @click="goToProfile(index)" class="cursor-pointer"
                   ><img :src="data.profile_img" />
                 </q-avatar>
-              </q-item-section>
+              </q-item-section> -->
               <q-item-section>
                 <span
                   class="change-tag-color cursor-pointer"
@@ -17,7 +17,10 @@
                 >
                   <b style="font-size: 15px;">{{ data.user.username }}</b>
                 </span>
-                <span>글 ?? · 팔로워 {{ data.user.follower_num }}</span>
+                <span
+                  >팔로잉 {{ data.user.followee_num }} · 팔로워
+                  {{ data.user.follower_num }}</span
+                >
               </q-item-section>
             </q-item>
           </q-list>
@@ -50,9 +53,12 @@
 </template>
 
 <script>
-import { getFollowerList, followOtherUser } from '@/api/follow';
+import { getOtherFollowerList, followOtherUser } from '@/api/follow';
 
 export default {
+  props: {
+    userId: String,
+  },
   data() {
     return {
       followerData: [],
@@ -78,7 +84,7 @@ export default {
     async getFollower() {
       try {
         this.$q.loading.show();
-        const { data } = await getFollowerList();
+        const { data } = await getOtherFollowerList(this.userId);
         this.followerData = data;
       } catch (error) {
         console.log(error);

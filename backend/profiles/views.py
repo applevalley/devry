@@ -139,11 +139,20 @@ def profile_show(request, profile_pk):
             for ref in QnaSerializer(some_qna).data['ref_tags']:
                 tags_list[ref] += 1
 
+        # forum에서의 동일한 과정
+        all_forums = Post.objects.filter(user=UserJoinedSerializer(profile).data['id'])
+        for some_forum in all_forums:
+            for ref in PostSerializer(some_forum).data['ref_tags']:
+                tags_list[ref] += 1
+
+
         # 한 번 이상 추가된 태그들만 남겨놓는 작업
 
         for single_tag in tags_list:
             if tags_list[single_tag] > 0:
                 real_tags[single_tag] = tags_list[single_tag]
+
+
 
         # 팔로잉
 

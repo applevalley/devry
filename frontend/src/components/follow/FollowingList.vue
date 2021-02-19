@@ -5,11 +5,11 @@
         <div class="col-8 row" style="height:100%">
           <q-list style="min-width:300px; margin-left: 30px;">
             <q-item>
-              <q-item-section avatar>
+              <!-- <q-item-section avatar>
                 <q-avatar @click="goToProfile(index)" class="cursor-pointer"
                   ><img :src="data.profile_img" />
                 </q-avatar>
-              </q-item-section>
+              </q-item-section> -->
               <q-item-section>
                 <span
                   class="change-tag-color cursor-pointer"
@@ -20,7 +20,8 @@
                   }}</b>
                 </span>
                 <span
-                  >글 ?? · 팔로워 {{ data.following_user.follower_num }}</span
+                  >팔로잉 {{ data.following_user.followee_num }} · 팔로워
+                  {{ data.following_user.follower_num }}</span
                 >
               </q-item-section>
             </q-item>
@@ -54,9 +55,12 @@
 </template>
 
 <script>
-import { getFolloweeList, followOtherUser } from '@/api/follow';
+import { getOtherFolloweeList, followOtherUser } from '@/api/follow';
 
 export default {
+  props: {
+    userId: String,
+  },
   data() {
     return {
       followeeData: [],
@@ -64,7 +68,8 @@ export default {
   },
   methods: {
     goToProfile(index) {
-      this.$router.push(`/profile/${this.followerData[index].user.id}`);
+      console.log('click!');
+      this.$router.push(`/profile/${this.followerData[index].id}`);
       location.reload();
     },
     async toggleFollow(index) {
@@ -82,13 +87,26 @@ export default {
     async getFollowee() {
       try {
         this.$q.loading.show();
-        const { data } = await getFolloweeList();
+        const { data } = await getOtherFolloweeList(this.userId);
         this.followeeData = data;
       } catch (error) {
         console.log(error);
       } finally {
         this.$q.loading.hide();
       }
+    },
+  },
+  computed: {
+    followId() {
+      return this.$store.state.follow.id;
+    },
+  },
+  watch: {
+    async followId(newValue) {
+      // this.userId = newValue.userId;
+      const { data } = await getOtherFolloweeList(newValue);
+      this.followeeData = data;
+      console.log(this.followeeData);
     },
   },
   async created() {

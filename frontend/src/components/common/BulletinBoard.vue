@@ -43,13 +43,17 @@
 export default {
   props: {
     origin_board: Array,
+    feed_board: Array,
+    sorting: String,
   },
   data() {
     return {
-      sort: 'time',
+      sort: this.sorting,
       search: '',
       board: this.origin_board,
-      prep_board: this.origin_board,
+      union_board: this.feed_board
+        ? [...this.feed_board, ...this.origin_board]
+        : this.origin_board,
     };
   },
   watch: {
@@ -82,7 +86,9 @@ export default {
       } else if (newValue === 'like') {
         this.board.sort((item1, item2) => item2.like_num - item1.like_num);
       } else if (newValue === 'feed') {
-        //
+        this.board = this.union_board;
+      } else if (newValue === 'latest') {
+        this.board = this.origin_board;
       }
     },
     selectedTags(newValue) {
@@ -109,7 +115,7 @@ export default {
   methods: {
     seachPost() {
       const searchReg = new RegExp(this.search, 'i');
-      this.board = this.prep_board.filter(item => {
+      this.board = this.origin_board.filter(item => {
         if (searchReg.test(item.title)) return true;
         if (searchReg.test(item.user.username)) return true;
         return false;

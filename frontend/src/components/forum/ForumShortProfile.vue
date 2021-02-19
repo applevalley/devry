@@ -105,7 +105,7 @@
 
 <script>
 import { followOtherUser } from '@/api/follow';
-
+//
 export default {
   props: {
     info: Object,

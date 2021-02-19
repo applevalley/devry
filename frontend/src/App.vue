@@ -3,7 +3,7 @@
     <main-header />
     <liquid-tag-guide-modal></liquid-tag-guide-modal>
     <account-modal></account-modal>
-    <follow-modal></follow-modal>
+    <follow-modal v-if="$store.state.follow.modal"></follow-modal>
     <side-bar></side-bar>
     <tag-bar></tag-bar>
     <q-page-container>

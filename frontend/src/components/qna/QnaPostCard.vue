@@ -91,7 +91,7 @@ export default {
 <style scoped>
 .post-card-frame {
   width: 100%;
-  height: 80px;
+  height: 110px;
   border: 1px solid #c1b9b9;
   border-radius: 8px;
 }

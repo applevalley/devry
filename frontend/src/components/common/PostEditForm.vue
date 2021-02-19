@@ -69,6 +69,8 @@
           :updateQna="updateQna"
           :deleteQna="deleteQna"
           :createForum="createForum"
+          :updateForum="updateForum"
+          :deleteForum="deleteForum"
         ></slot>
       </div>
     </div>
@@ -132,12 +134,11 @@ export default {
         try {
           this.$q.loading.show();
           const { data } = await loadForumItem(post_id);
-          this.user = data.user;
-          this.profile = data.profile;
-          this.title = data.title;
-          this.content = data.content;
-          this.ref_tags = data.ref_tags;
-          this.thumbnail = data.thumbnail;
+          const loadedData = data.forum_post[0];
+          this.title = loadedData.title;
+          this.content = loadedData.content;
+          this.ref_tags = loadedData.ref_tags;
+          this.thumbnail = loadedData.thumbnail;
         } catch (error) {
           console.log(error);
         } finally {
@@ -265,7 +266,7 @@ export default {
         console.log(this.file);
         this.$q.loading.show();
         // 썸네일을 우선 서버에 저장한다.
-        if (!this.file) {
+        if (this.file) {
           const frm = new FormData();
           frm.append('image', this.file);
           const { data } = await saveQnaImage(frm);
@@ -296,7 +297,7 @@ export default {
       try {
         this.$q.loading.show();
         // 썸네일을 우선 서버에 저장한다.
-        if (!this.file) {
+        if (this.file) {
           const frm = new FormData();
           frm.append('image', this.file);
           const { data } = await saveQnaImage(frm);
@@ -304,7 +305,7 @@ export default {
         }
 
         // 돌려받은 썸네일 url을 thumbnail 항목에 넣어서 저장한다.
-        await updateForumItem({
+        await updateForumItem(this.$route.params.id, {
           title: this.title,
           user: this.$store.state.id,
           content: this.content,

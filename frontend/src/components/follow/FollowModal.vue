@@ -38,11 +38,11 @@
 
               <q-tab-panels v-model="tab" animated>
                 <q-tab-panel name="follow" style="padding-top: 0px;">
-                  <FollowerList></FollowerList>
+                  <FollowerList :userId="userId"></FollowerList>
                 </q-tab-panel>
 
                 <q-tab-panel name="following" style="padding-top: 0px;">
-                  <FollowingList></FollowingList>
+                  <FollowingList :userId="userId"></FollowingList>
                 </q-tab-panel>
               </q-tab-panels>
             </div>
@@ -60,7 +60,8 @@ export default {
   components: { FollowerList, FollowingList },
   data() {
     return {
-      tab: '',
+      tab: this.$store.state.follow.tab,
+      userId: this.$store.state.follow.id,
       thumbStyle: {
         right: '2px',
         borderRadius: '5px',
@@ -82,6 +83,7 @@ export default {
   },
   watch: {
     followTab(newValue) {
+      console.log(newValue);
       this.tab = newValue;
     },
   },

@@ -3,7 +3,7 @@
     <!-- 썸네일 -->
     <q-img
       :src="
-        entity.thumnail
+        entity.thumbnail
           ? thumbnail_url
           : require('@/assets/basic_thumbnail.png')
       "
@@ -36,7 +36,7 @@
             <div class="row col-2">
               <span class="q-mt-xs">
                 <q-avatar style="border: 1px solid #ECEFF1" size="2.8em">
-                  <!-- <q-img
+                  <q-img
                     :src="
                       entity.profile.profile_img
                         ? img_url
@@ -44,7 +44,7 @@
                     "
                     @click="goToProfile"
                     class="cursor-pointer"
-                  /> -->
+                  />
                 </q-avatar>
               </span>
             </div>
@@ -54,7 +54,7 @@
                   style="font-size: 14px; color: #464646"
                   @click="goToProfile"
                   class="cursor-pointer"
-                  ><b>유저이름</b></span
+                  ><b>{{ entity.user.username }}</b></span
                 >
                 <div class="text-caption row">
                   {{ entity.written_time | moment('YYYY/MM/DD hh:mm') }}
@@ -100,8 +100,8 @@ export default {
   },
   data() {
     return {
-      img_url: `${process.env.VUE_APP_SERVER_API_URL}${this.entity.profile.profile_img}`,
-      thumbnail_url: `${process.env.VUE_APP_SERVER_API_URL}${this.entity.thumbnail}`,
+      img_url: `${this.entity.profile.profile_img}`,
+      thumbnail_url: `${this.entity.thumbnail}`,
     };
   },
   methods: {
@@ -109,6 +109,10 @@ export default {
       return colorSoloMapper(tag, alpha);
     },
     goToDetail() {
+      if (!this.$store.getters.isLogined) {
+        alert('로그인이 필요합니다!');
+        return;
+      }
       this.$router.push(`/forum-detail/${this.entity.id}`);
     },
     goToProfile() {

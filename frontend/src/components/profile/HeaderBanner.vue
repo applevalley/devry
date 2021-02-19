@@ -19,11 +19,30 @@
         <div class="col-9 q-pr-xl">
           <div class="row q-mb-sm justify-between">
             <span class="text-h5  text-indigo-14"> @{{ info.username }}</span>
-            <q-btn
-              style="background-color:#1595DC;"
-              class="text-white text-bold"
-              >follow</q-btn
-            >
+            <template v-if="$store.state.id != info.userId">
+              <template v-if="!is_following">
+                <q-btn
+                  no-caps
+                  color="primary"
+                  id="follow-btn"
+                  label="Follow"
+                  @click="toggleFollow"
+                  style="width: 200px"
+                  class="q-mb-sm row col-10"
+                />
+              </template>
+              <template v-else>
+                <q-btn
+                  no-caps
+                  outline
+                  color="primary"
+                  label="Following"
+                  @click="toggleFollow"
+                  style="width: 200px"
+                  class="q-mb-sm row col-10"
+                />
+              </template>
+            </template>
           </div>
           <!-- 사는 곳, 소속, 이메일 정보를 받는 행 -->
           <div class="row q-mb-md full-width">
@@ -77,7 +96,7 @@
             </div>
             <div>
               <span class="q-mr-md cursor-pointer" @click="onFollow('follow')"
-                >팔로워: <b>{{ info.followerNum }}</b></span
+                >팔로워: <b>{{ followerNum }}</b></span
               >
               <span class="cursor-pointer" @click="onFollow('following')"
                 >팔로우: <b>{{ info.followeeNum }}</b></span
@@ -87,7 +106,12 @@
         </div>
       </div>
       <div class="row q-px-xl q-my-md full-width">
-        <div class="full-width">
+        <div class="full-width" v-if="info.bio">
+          <q-icon
+            :name="$i.ionChatboxEllipsesOutline"
+            style="color:#727272"
+            size="17px"
+          ></q-icon>
           {{ info.bio }}
         </div>
       </div>
@@ -96,17 +120,57 @@
 </template>
 
 <script>
+import { followOtherUser } from '@/api/follow';
+
 export default {
   props: {
     info: Object,
+  },
+  data() {
+    return {
+      followerData: [],
+      is_following: this.info.is_following,
+      followerNum: this.info.followerNum,
+    };
+  },
+  watch: {
+    info(newValue) {
+      (this.is_following = newValue.is_following),
+        (this.followerNum = newValue.followerNum);
+    },
   },
   methods: {
     linkRedirect(url) {
       window.open(url);
     },
     onFollow(tab) {
-      this.$store.commit('onFollowModal', tab);
+      this.$store.commit('onFollowModal', [tab, this.$route.params.id]);
     },
+    async toggleFollow() {
+      try {
+        this.$q.loading.show();
+        const want_pk = this.info.userId;
+        await followOtherUser(want_pk);
+        this.is_following = !this.is_following;
+        if (this.is_following) {
+          this.followerNum = this.followerNum + 1;
+        } else {
+          this.followerNum = this.followerNum - 1;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.$q.loading.hide();
+      }
+    },
+  },
+  async created() {
+    try {
+      this.getFollower();
+      this.checkFollow();
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

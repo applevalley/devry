@@ -29,7 +29,7 @@
           height="170px"
         >
           <q-carousel-slide
-            v-for="(post, index) in info.pinned"
+            v-for="(post, index) in info.qnas_pinned"
             :name="index"
             :key="post.id"
             style="border-radius: 10px;"
@@ -52,31 +52,19 @@
       </div>
       <div>
         <q-tabs v-model="post" style="color:#259EC5">
-          <q-tab name="qna" label="QnA" class="qtab" />
-          <q-tab name="forum" label="포럼" class="qtab" />
+          <q-tab name="qna" label="질문" />
           <q-tab name="comments" label="댓글" />
         </q-tabs>
       </div>
     </div>
-    <q-card v-if="post == 'forum'">
-      <q-card-section
-        style="width:100%;border: 2px solid #2F95B4; border-raidus:5px; "
-      >
-        <post-card
-          v-for="post in info.posts"
-          :detail="post"
-          :key="post.id"
-        ></post-card>
-      </q-card-section>
-    </q-card>
     <q-card v-if="post == 'qna'">
       <q-card-section
         style="width:100%;border: 2px solid #2F95B4; border-raidus:5px; "
       >
         <qna-post-card
-          v-for="post in info.posts"
-          :detail="post"
-          :key="post.id"
+          v-for="qna in info.qnas"
+          :detail="qna"
+          :key="qna.id"
         ></qna-post-card>
       </q-card-section>
     </q-card>

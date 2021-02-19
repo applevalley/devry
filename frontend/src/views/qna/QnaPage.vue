@@ -22,7 +22,7 @@
 
       <!-- 게시판 보드 -->
       <!-- <qna-board :current="current"></qna-board> -->
-      <bulletin-board :origin_board="board">
+      <bulletin-board :origin_board="board" sorting="time">
         <template slot="tab">
           <q-tab name="time" label="최신순" />
           <q-tab name="comment" label="댓글순" />

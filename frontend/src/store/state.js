@@ -16,6 +16,7 @@ export default {
   follow: {
     modal: false,
     tab: 'follow',
+    id: 0,
   },
   leftDrawal: true,
   tagFilter: false,

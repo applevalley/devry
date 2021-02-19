@@ -1,10 +1,16 @@
 <template>
   <div class="row full-width">
+    <q-img
+      class="full-width row items-center"
+      position="0 -250px"
+      style="height:200px; "
+      :src="info.thumbnail"
+    />
     <q-card
       flat
       bordered
       class="q-px-lg row col-12 q-pt-xs my-card"
-      style="min-height: 300px;"
+      style="min-height: 300px"
     >
       <div class="row col-12 justify-end">
         <span>
@@ -12,7 +18,7 @@
           <q-btn flat round dense icon="more_vert" class="q-mt-md">
             <q-menu>
               <q-list style="min-width: 100px">
-                <q-item clickable v-close-popup>
+                <q-item clickable v-close-popup @click="updateForum">
                   <q-item-section>수정하기</q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup @click="deleteForum">
@@ -46,14 +52,9 @@
           </span>
         </div>
       </q-card-section>
-      <div
-        class="row col-12 q-px-md q-mt-md q-mb-xl"
-        style="min-height: 120px;"
-      >
-        <div class="q-mt-lg">
-          {{ info.content }}
-        </div>
-        <!-- <v-md-editor v-model="content" mode="preview"> </v-md-editor> -->
+      <div class="row col-12">
+        <v-md-editor :value="liquidResolve(content)" mode="preview">
+        </v-md-editor>
       </div>
     </q-card>
   </div>
@@ -62,17 +63,25 @@
 <script>
 import { colorSoloMapper } from '@/utils/tagColorMapper';
 import { deleteForumItem } from '@/api/forum';
-
+import { liquidResolver } from '@/utils/liquidTag';
 export default {
   props: {
     info: Object,
   },
   data() {
-    return {};
+    return {
+      content: this.info.content,
+    };
   },
   methods: {
     tagColor(tag, alpha) {
       return colorSoloMapper(tag, alpha);
+    },
+    liquidResolve(tag) {
+      return liquidResolver(tag);
+    },
+    updateForum() {
+      this.$router.push(`/forum/${this.info.id}`);
     },
     async deleteForum() {
       try {
