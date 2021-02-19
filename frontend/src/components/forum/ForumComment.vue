@@ -1,7 +1,7 @@
 <template>
   <div class="row col-12">
     <!-- 댓글 시작 -->
-    <div v-for="(data, index) in info" :key="index" class="row col-12">
+    <div v-for="(data, index) in this.contents" :key="index" class="row col-12">
       <div class="row col-12">
         <!-- <div class="row col-12" v-for="(data, index) in info" :key="index"> -->
         <div class="row col-2">
