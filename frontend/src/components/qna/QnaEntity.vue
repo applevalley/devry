@@ -61,7 +61,7 @@
             <q-img
               :src="
                 entity.profile.profile_img
-                  ? img_url
+                  ? entity.profile.profile_img
                   : require('@/assets/basic_image.png')
               "
               @click="goToProfile"

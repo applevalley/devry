@@ -39,4 +39,7 @@ export default {
 a {
   text-decoration: none;
 }
+body {
+  font-size: 10px;
+}
 </style>

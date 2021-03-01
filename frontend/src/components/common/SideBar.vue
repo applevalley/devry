@@ -5,8 +5,8 @@
     side="left"
     behavior="desktop"
     bordered
-    :width="250"
     overlay
+    width="240"
     persistent
   >
     <q-tabs

@@ -1,12 +1,8 @@
 <template>
   <div class="row justify-center overflow-hidden">
     <img
-      :src="
-        entity.thumnail 
-          ? img_url 
-          : require('@/assets/basic_image.png')
-      "
-      style="height:240px; width:100%;"
+      :src="entity.thumnail"
+      style="height:240px; width:60%;"
       class="cursor-pointer"
       @click="goToDetail"
     />
@@ -21,17 +17,15 @@ export default {
   data() {
     return {
       num: '',
-      img_url: this.entity.thumnail
-    }
+      img_url: this.entity.thumnail,
+    };
   },
   methods: {
     goToDetail() {
       this.$router.push(`/event-detail/${this.entity.id}`);
-    }
+    },
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

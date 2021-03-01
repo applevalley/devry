@@ -41,7 +41,10 @@
         <forum-entity :entity="forum"></forum-entity>
       </div>
     </div>
-    <div class="row q-mt-md col-12  justify-center items-center" v-else>
+    <div
+      class="row q-mt-md col-12  justify-center items-center"
+      v-else-if="$store.getters.isLogined"
+    >
       <div class="row justify-center full-width">
         <div class="text-grey-7 q-mb-md">
           아직 데이터가 없습니다. 다른 사용자들을 팔로우 해서 소식을 받아보세요.

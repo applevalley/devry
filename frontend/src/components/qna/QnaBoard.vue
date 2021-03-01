@@ -52,11 +52,16 @@
           :key="msg"
         >
           <div
-            class="row col-12 shadow-1 overflow-hidden"
+            class="row col-12 shadow-1 overflow-hidden "
             style="border-radius:5px;"
           >
             <div class="col-2" :style="{ 'background-color': color }"></div>
-            <div class="col-10 text-center">{{ msg }}</div>
+            <div
+              class="col-10 row justify-center items-center"
+              style="font-size:0.8rem"
+            >
+              <div class="text-center">{{ msg }}</div>
+            </div>
           </div>
         </div>
       </div>

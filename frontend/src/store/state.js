@@ -23,11 +23,11 @@ export default {
   selectedTags: [],
   tags_selected: {
     Angular: true,
-    BackEnd: true,
+    Backend: true,
     CSS3: true,
     Django: true,
     Docker: true,
-    FrontEnd: true,
+    Frontend: true,
     HTML5: true,
     Java: true,
     JavaScript: true,

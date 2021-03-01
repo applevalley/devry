@@ -48,13 +48,10 @@
             {{ entity.start | moment('YYYY/MM/DD') }}
           </div>
           <div>
-            <img
-              :src="
-                entity.profile_img
-                  ? profile_img
-                  : require('@/assets/basic_image.png')
-              "
-              style="width: 50px; height: 40px;  border-radius: 10px;"
+            <q-avatar
+              style="width: 50px; height: 40px;  border-radius: 10px; background-size: 100px; background-position: 50% 50%;"
+              square
+              :style="{ 'background-image': `url(${entity.profile_img})` }"
             />
           </div>
         </div>
@@ -65,9 +62,7 @@
 
 <script>
 import { toggleEventBookmark } from '@/api/event';
-import {
-  colorSoloMapper,
-} from '@/utils/tagColorMapper';
+import { colorSoloMapper } from '@/utils/tagColorMapper';
 
 export default {
   props: {
@@ -75,7 +70,7 @@ export default {
   },
   data() {
     return {
-      profile_img: this.entity.profile_img
+      profile_img: this.entity.profile_img,
     };
   },
   methods: {
@@ -115,5 +110,8 @@ export default {
 ul {
   list-style-type: none;
   padding-left: 0px;
+}
+.q-img >>> .q-img__image {
+  background-size: 200%;
 }
 </style>
