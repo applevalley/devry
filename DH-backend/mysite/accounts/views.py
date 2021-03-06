@@ -28,8 +28,8 @@ class UserLoginAPI(generics.CreateAPIView):
     serializer_class=UserLoginSerializer
     def post(self, request):
         context={}
-        email=request.POST.get('username')
-        password=request.POST.get('password')
+        email=request.data['email']
+        password=request.data['password']
         # 사용자의 정보를 맞추어보고 해당 user가 있으면 반환한다.
         user=authenticate(email=email, password=password)
         
