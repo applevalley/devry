@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'accounts',
+    'qnas',
 
 ]
 AUTH_USER_MODEL = 'accounts.User'

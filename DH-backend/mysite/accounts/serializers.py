@@ -37,6 +37,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
     user=serializers.SerializerMethodField()
     # tech는 문자열로 저장될 것이기 때문에 분리를 시켜줘야한다.
     tech=serializers.SerializerMethodField()
+    # my_tags 역시 마찬가지로 문자열을 분리 시켜줘야한다.
+    my_tags=serializers.SerializerMethodField()
+    
     # TODO: 차후 구현할 Forum, QnA, Pinned 데이터 등을 get을 통해 노출 시켜줄 필요 있음
     class Meta:
         model=Profile
@@ -47,8 +50,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def get_tech(self, profile):
         return profile.tech.split('|')
 
+    def get_my_tags(self, profile):
+        return profile.my_tags.split('|')
+
 class UserProfileSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model=Profile
         # TODO: 프로젝트와 링크 연결할 것
-        fields=['region','group','bio','tech']
+        fields=['region','group','bio','tech','my_tags']

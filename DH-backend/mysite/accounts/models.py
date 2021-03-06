@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-
-
 # Create your models here.
 
 # 계정 생성시 반드시 아래의 클래스를 통한다.
@@ -80,6 +78,7 @@ class Profile(models.Model):
     tech         = models.TextField('Tech Stack', default='')
     link         = models.ForeignKey('Link', on_delete=models.CASCADE, verbose_name='링크 페이지', default='')
     project      = models.ForeignKey('Project', on_delete=models.CASCADE, verbose_name='링크 페이지', default='')
+    my_tags      = models.TextField('My Tags', default='')
 
     def __str__(self):
         return self.user

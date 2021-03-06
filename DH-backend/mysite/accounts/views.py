@@ -47,6 +47,8 @@ class UserLoginAPI(generics.CreateAPIView):
             context['error_message']="인증에 실패했습니다"
         return Response(context, status=status.HTTP_404_NOT_FOUND)
 
+
+
 class UserProfileAPI(generics.RetrieveAPIView):
     serializer_class=UserProfileSerializer
 
@@ -61,12 +63,16 @@ class UserProfileSettingAPI(generics.UpdateAPIView):
     def put(self, request):
         profile=get_object_or_404(Profile, user=request.user)
         # print(request.data)
-        data = request.data
         if 'tech' in request.data:
             data = request.data.copy()
             #TODO: vue.js를 통해서 실제로 데이터가 문자열이 아닌 배열로 들어온다면 해당 로직을 바꿔야한다.
             # data['tech'] = '|'.join(data['tech']) 
             data['tech'] = '|'.join(data['tech'].split(',')) 
+        if 'my_tags' in request.data:
+            data = request.data.copy()
+            #TODO: vue.js를 통해서 실제로 데이터가 문자열이 아닌 배열로 들어온다면 해당 로직을 바꿔야한다.
+            # data['tech'] = '|'.join(data['tech']) 
+            data['my_tags'] = '|'.join(data['my_tags'].split(',')) 
         serializer=UserProfileSettingSerializer(profile, data=data, partial=True)
         if serializer.is_valid():
             serializer.save()
