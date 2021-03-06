@@ -208,7 +208,7 @@ export default {
           qna: qnaId,
         });
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -220,7 +220,7 @@ export default {
         await deleteQnaBigComment(ans_pk);
         location.reload();
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -237,14 +237,14 @@ export default {
         await toggleQnaCommentChoose(ans_pk);
         this.info[index].assisted = !this.info[index].assisted;
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async reloadRecomment(index) {
       try {
         this.recomments = await getRecomments(this.info[index].id);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

@@ -7,7 +7,15 @@
       <q-select
         outlined
         v-model="category"
-        :options="['ALL', 'Conference', 'Workshop', 'Hackathon', 'Competition', 'Meeting', 'Recruting']"
+        :options="[
+          'ALL',
+          'Conference',
+          'Workshop',
+          'Hackathon',
+          'Competition',
+          'Meeting',
+          'Recruting',
+        ]"
         style="width:140px;"
       />
     </div>
@@ -22,13 +30,12 @@
         >
           <upcoming-entity :entity="event"></upcoming-entity>
         </q-intersection>
-      </div>    
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { testCase } from '@/dummy/Events.js';
 import UpcomingEntity from '@/components/event/UpcomingEntity.vue';
 import { getEventList } from '@/api/board';
 
@@ -41,12 +48,6 @@ export default {
       category: 'ALL',
       upcoming_events: [],
     };
-  },
-  methods: {
-    // checkBookMark: function(index) {
-    //   this.categorySortedList[index].bookmark = !this.categorySortedList[index]
-    //     .bookmark;
-    // },
   },
   computed: {
     categorySortedList() {
@@ -65,12 +66,12 @@ export default {
       this.upcoming_events = data;
       return data;
     } catch (error) {
-      console.log(error);
+      alert(error);
       // alert('에러가 발생했습니다.)
     } finally {
       this.$q.loading.hide();
     }
-  }
+  },
 };
 </script>
 

@@ -100,7 +100,7 @@ export default {
           return false;
         });
       } catch (error) {
-        console.log(error);
+        alert(error);
         // alert('에러가 발생했습니다.)
       } finally {
         this.$q.loading.hide();

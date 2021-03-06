@@ -183,7 +183,7 @@ export default {
             this.contents.comment_set[index].like_comment_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
 
@@ -213,7 +213,7 @@ export default {
           user: this.contents.user.id,
         });
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -225,7 +225,7 @@ export default {
         await deleteForumComment(comment_pk);
         location.reload();
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -237,7 +237,7 @@ export default {
       const { data } = await loadForumItem(index);
       this.contents = data;
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   },
 };

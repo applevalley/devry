@@ -162,7 +162,7 @@ export default {
           this.followerNum = this.followerNum - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

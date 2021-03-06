@@ -90,7 +90,7 @@ export default {
         const { data } = await getEventBookmarkList();
         this.EventBookmarkList = data;
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -102,7 +102,7 @@ export default {
         await toggleEventBookmark(eventId);
         this.getEventBookmark();
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -112,7 +112,7 @@ export default {
     try {
       this.getEventBookmark();
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   },
 };

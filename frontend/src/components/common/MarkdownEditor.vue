@@ -131,7 +131,6 @@ export default {
     removeTag(tag, index) {
       this.ref_tags.splice(index, 1);
     },
-    // TODO: img 폼데이터로 연결해서 전송
     async handleUploadImage(event, insertImage) {
       const frm = new FormData();
       frm.append('image', event.target.files[0]);
@@ -140,7 +139,7 @@ export default {
         const { data } = await saveQnaImage(frm);
         this.imgUrl = data.image;
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
       // Here is just an example
       insertImage({

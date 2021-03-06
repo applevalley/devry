@@ -5,14 +5,15 @@ function createInstance() {
     baseURL: process.env.VUE_APP_SERVER_API_URL,
   });
 }
+
+// header의 Authorization에 토큰을 부여함
 function createInstanceWithAuth(url) {
   const instance = axios.create({
     baseURL: `${process.env.VUE_APP_SERVER_API_URL}${url}`,
   });
   return setInterceptors(instance);
 }
+
 const instance = createInstance();
-const instanceAuth = setInterceptors(instance);
-const profileSetting = createInstanceWithAuth('profiles/setting/');
-const board = createInstanceWithAuth('board/');
-export { instance, profileSetting, board, instanceAuth };
+const instanceAuth = createInstanceWithAuth('');
+export { instance, instanceAuth };

@@ -90,7 +90,7 @@ export default {
         const { data } = await getQnaBookmarkList();
         this.QnaBookmarkList = data;
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -102,7 +102,7 @@ export default {
         await toggleQnaBookmark(qnaId);
         this.getQnaBookmark();
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -112,7 +112,7 @@ export default {
     try {
       this.getQnaBookmark();
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   },
 };

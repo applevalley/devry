@@ -59,7 +59,7 @@ export default {
           this.info.like_ans_num = this.info.like_ans_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

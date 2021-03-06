@@ -70,7 +70,7 @@ export default {
         this.profiles = data;
         this.max = Math.ceil(data.length / this.unit);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     goToProfile(id) {

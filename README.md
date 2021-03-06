@@ -278,7 +278,6 @@ DEVRY는 **개발자 특화 커뮤니티** 서비스와 **포트폴리오** 서�
 
 ### 3. 편집 기능 
 
-***구현 예정***
 
 - Forum, QnA 게시판 글 작성 시, 마크다운 에디터 지원
 - Ctrl + S 입력을 통해 md 파일 미리보기 지원
@@ -290,7 +289,7 @@ DEVRY는 **개발자 특화 커뮤니티** 서비스와 **포트폴리오** 서�
   - Instagram
 
 
-![liquid](img/README/Liquid 태그 가이드.PNG)
+![liquid](img/README/Liquid_태그_가이드.PNG)
 ---
 ![liquid1](img/README/Liquid_1.PNG)
 ---

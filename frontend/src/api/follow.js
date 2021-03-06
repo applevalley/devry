@@ -1,4 +1,4 @@
-import { instance } from '@/api';
+import { instance, instanceAuth } from '@/api';
 //// 팔로워
 // 로그인한 유저의 팔로워 목록 불러오기 (나를 팔로우하는 사람)
 function getFollowerList() {
@@ -12,7 +12,7 @@ function getFolloweeList() {
 
 // 특정 유저 팔로우하기
 function followOtherUser(want_pk) {
-  return instance.post(`following/${want_pk}/`);
+  return instanceAuth.post(`following/${want_pk}/`);
 }
 
 // 특정 유저의 팔로워 목록 불러오기 (내가 팔로우하는 사람)

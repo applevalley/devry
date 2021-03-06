@@ -71,10 +71,8 @@ export default {
           qna: this.info.post_id,
         });
         location.reload();
-        // QnA 게시판으로 이동
-        // this.$router.push({ path: `/qna-detail/${this.info.post_id}` });
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

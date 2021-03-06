@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import ProfileSettingForm from '@/components/profileSetting/ProfileSettingForm';
-import { loadProfile } from '@/api/profileSetting';
+import ProfileSettingForm from '@/components/profile/setting/ProfileSettingForm';
+import { loadProfile } from '@/api/profile';
 export default {
   components: { ProfileSettingForm },
   data() {
@@ -32,7 +32,11 @@ export default {
         bio: '',
         email: '',
         group: '',
-        link: [],
+        link: [
+          { sns_name: '', sns_url: '' },
+          { sns_name: '', sns_url: '' },
+          { sns_name: '', sns_url: '' },
+        ],
         my_tags: [],
         profile_img: null,
         project: [],
@@ -52,33 +56,25 @@ export default {
       this.profile_info.bio = data.bio;
       this.profile_info.email = data.email;
       this.profile_info.group = data.group;
-      this.profile_info.link = data.link.length
-        ? data.link
-        : [
-            { sns_name: '', sns_url: '' },
-            { sns_name: '', sns_url: '' },
-            { sns_name: '', sns_url: '' },
-          ];
+      for (const index in data.link) {
+        this.profile_info.link[index]['sns_name'] =
+          data.link[index]['sns_name'];
+        this.profile_info.link[index]['sns_url'] = data.link[index]['sns_url'];
+      }
+      // my_tags와 tech_stack은 넘어오는 값이 하나일 경우에 배열이 아닌 string으로 오는 문제가 있다.
       this.profile_info.my_tags =
         typeof data.my_tags == 'string' ? [data.my_tags] : data.my_tags;
-      this.profile_info.profile_img = data.profile_img;
-      this.profile_info.project = data.project;
-      // this.profile_info.project = data.project.length
-      //   ? data.project
-      //   : [
-      //       { project_name: '', project_url: '' },
-      //       { project_name: '', project_url: '' },
-      //       { project_name: '', project_url: '' },
-      //     ];
-      this.profile_info.region = data.region;
       this.profile_info.tech_stack =
         typeof data.tech_stack == 'string'
           ? [data.tech_stack]
           : data.tech_stack;
+      this.profile_info.profile_img = data.profile_img;
+      this.profile_info.project = data.project;
+      this.profile_info.region = data.region;
       this.profile_info.username = username;
       this.loaded = true;
     } catch (error) {
-      console.log(error);
+      alert(error);
     } finally {
       this.$q.loading.hide();
     }

@@ -146,7 +146,7 @@ export default {
           this.follower_num = this.follower_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     goToProfile() {

@@ -164,11 +164,9 @@ export default {
         });
         this.$emit('signupSuccess');
       } catch (error) {
-        console.log(error);
-        // 에러 처리를 어떻게 할지 고민해봐야할 듯.
+        alert(error);
       } finally {
         this.$q.loading.hide();
-        // this.offModal();
       }
     },
     offModal() {

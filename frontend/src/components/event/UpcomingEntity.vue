@@ -96,10 +96,9 @@ export default {
         } else {
           this.entity.bookmark_num = this.entity.bookmark_num - 1;
         }
-        // getEventList()
         window.location.reload();
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

@@ -122,10 +122,9 @@ export default {
           user: this.$store.state.id,
         });
         this.newComment = '';
-        // this.$emit('reloadSmallAns');
         this.getComments();
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async getComments() {
@@ -133,7 +132,7 @@ export default {
         const { data } = await getSmallComments(this.post_id);
         this.commentList = data;
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async updateComment(e, quset_small_id, index, content) {
@@ -148,7 +147,7 @@ export default {
         this.getComments();
         this.closeEditor(index);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async deleteComment(quset_small_id) {
@@ -156,7 +155,7 @@ export default {
         await deleteSmallComment(quset_small_id);
         this.getComments();
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

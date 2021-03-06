@@ -63,7 +63,6 @@
 </template>
 
 <script>
-// import { checkUser } from '@/api/auth';
 import { validateEmail } from '@/utils/validation';
 export default {
   data() {
@@ -96,18 +95,11 @@ export default {
       } catch (error) {
         // alert('에러가 발생했습니다. 계정을 확인해주세요!');
         this.$emit('authPwdFail');
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
     },
-  },
-  created() {
-    // 로그인 되어있는 상태인지 확인
-    // const token = localStorage.getItem('jwt')
-    // if (token) {
-    //   this.login = true
-    // }
   },
 };
 </script>

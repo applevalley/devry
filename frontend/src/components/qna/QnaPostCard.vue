@@ -93,7 +93,7 @@ export default {
         await togglePinned(this.detail.id);
         this.pinned = !this.pinned;
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

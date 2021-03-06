@@ -89,7 +89,7 @@ export default {
           this.like_num = this.like_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async checkBookmark() {
@@ -106,7 +106,7 @@ export default {
           this.bookmark_num = this.bookmark_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

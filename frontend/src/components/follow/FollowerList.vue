@@ -80,7 +80,7 @@ export default {
         await followOtherUser(want_pk);
         this.getFollower();
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -92,7 +92,7 @@ export default {
         this.followerData = data;
         console.log(this.followerData);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -102,7 +102,7 @@ export default {
     try {
       this.getFollower();
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   },
 };

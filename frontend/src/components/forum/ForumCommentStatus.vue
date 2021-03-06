@@ -1,6 +1,5 @@
 <template>
   <div class="col-1 q-pl-lg">
-    <!-- <q-card flat bordered style="width: 45px; height: 65px;"> -->
     <q-card class="q-ml-lg" flat style="width: 45px; height: 65px;">
       <div style="margin:0 auto; text-align:center">
         <template v-if="liked_comment">
@@ -63,7 +62,7 @@ export default {
           this.like_comment_num = this.like_comment_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

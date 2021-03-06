@@ -115,7 +115,6 @@
 
 <script>
 import { followOtherUser } from '@/api/follow';
-//
 export default {
   props: {
     info: Object,
@@ -143,7 +142,7 @@ export default {
             this.followerNum = this.followerNum - 1;
           }
         } catch (error) {
-          console.log(error);
+          alert(error);
         } finally {
           this.$q.loading.hide();
         }

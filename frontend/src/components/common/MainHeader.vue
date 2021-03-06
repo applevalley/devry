@@ -18,14 +18,6 @@
         <div></div>
       </q-toolbar-title>
       <q-tabs align="left">
-        <!-- <q-input v-model="search" type="search" class="q-ma-sm" outlined>
-          <template v-slot:append>
-            <q-icon name="create" />
-          </template>
-        </q-input>
-        <q-btn color="black" :icon="$i.ionNotificationsOutline" round flat>
-        </q-btn> -->
-        <!-- 로그인 하기 이전 보여지는 버튼 구현 -->
         <q-btn color="grey" round flat v-if="!$store.getters.isLogined">
           <q-avatar :icon="$i.ionPersonCircleOutline"></q-avatar>
           <q-menu>
@@ -137,7 +129,7 @@ export default {
         await this.$store.dispatch('LOGOUT');
         location.reload();
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

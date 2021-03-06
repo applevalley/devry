@@ -75,7 +75,6 @@
 </template>
 
 <script>
-// import { changePwdUser } from '@/api/auth';
 import { validatePwd } from '@/utils/validation';
 export default {
   data() {

@@ -3,7 +3,7 @@
     <main-header />
     <liquid-tag-guide-modal></liquid-tag-guide-modal>
     <account-modal></account-modal>
-    <follow-modal v-if="$store.state.follow.modal"></follow-modal>
+    <follow-modal v-if="onFollowModal"></follow-modal>
     <side-bar></side-bar>
     <tag-bar></tag-bar>
     <q-page-container>
@@ -28,6 +28,11 @@ export default {
     TagBar,
     LiquidTagGuideModal,
   },
+  computed: {
+    onFollowModal() {
+      return this.$store.state.follow.modal;
+    },
+  },
 };
 </script>
 
@@ -38,8 +43,5 @@ export default {
 }
 a {
   text-decoration: none;
-}
-body {
-  font-size: 10px;
 }
 </style>

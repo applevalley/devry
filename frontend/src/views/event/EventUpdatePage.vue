@@ -11,15 +11,15 @@
         </p>
       </div>
       <!-- 이벤트 입력폼 -->
-      <event-registration-form></event-registration-form>
+      <event-create-form></event-create-form>
     </div>
   </div>
 </template>
 
 <script>
-import EventRegistrationForm from '@/components/event/EventRegistrationForm';
+import EventCreateForm from '@/components/event/EventCreateForm';
 export default {
-  components: { EventRegistrationForm },
+  components: { EventCreateForm },
 };
 </script>
 

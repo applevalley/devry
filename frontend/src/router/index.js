@@ -2,26 +2,38 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store/index';
 Vue.use(VueRouter);
+
+// 로그인 모달 작동
 const loginModalOn = () => {
   store.commit('setAccountModalType', 'login');
   store.commit('onAccountModal');
 };
+
+// 로그인이 안되어있으면 로그인 모달 작동
+const isLogined = (to, from, next) => {
+  if (!store.getters.isLogined) {
+    loginModalOn();
+    return;
+  }
+  next();
+};
+
+// 관리자가 아닐경우 포럼으로 이동
+const isAdmin = (to, from, next) => {
+  if (!store.getters.isLogined && Number(store.state.id) <= 5) {
+    alert('관리자만 가능합니다');
+    next('/forum');
+    return;
+  }
+  next();
+};
+
 const routes = [
   {
     path: '/',
     redirect: '/forum',
   },
-  {
-    path: '/main',
-    redirect: '/forum',
-    // name: 'Main',
-    // component: () => import('@/views/MainPage.vue'),
-  },
-  {
-    path: '/bookmark',
-    name: 'Bookmark',
-    component: () => import('@/views/bookmark/BookmarkPage.vue'),
-  },
+  // 프로필 관련
   {
     path: '/profile/:id',
     name: 'Profile',
@@ -31,18 +43,19 @@ const routes = [
     path: '/profile-setting',
     name: 'ProfileSetting',
     component: () => import('@/views/profile/ProfileSettingPage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined) {
-        loginModalOn();
-        return;
-      }
-      next();
-    },
+    beforeEnter: isLogined,
   },
+  // 북마크
+  {
+    path: '/bookmark',
+    name: 'Bookmark',
+    component: () => import('@/views/bookmark/BookmarkPage.vue'),
+  },
+  // QnA 관련
   {
     path: '/qna',
     name: 'QnA',
-    component: () => import('@/views/qna/QnaPage.vue'),
+    component: () => import('@/views/qna/QnaBoardPage.vue'),
   },
   {
     path: '/qna-detail/:id',
@@ -53,54 +66,19 @@ const routes = [
     path: '/qna/create',
     name: 'QnACreate',
     component: () => import('@/views/qna/QnaCreatePage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined) {
-        loginModalOn();
-        return;
-      }
-      next();
-    },
+    beforeEnter: isLogined,
   },
   {
     path: '/qna/:id',
     name: 'QnAUpdate',
     component: () => import('@/views/qna/QnaUpdatePage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined) {
-        loginModalOn();
-        return;
-      }
-      next();
-    },
+    beforeEnter: isLogined,
   },
-  {
-    path: '/forum/create',
-    name: 'ForumCreate',
-    component: () => import('@/views/forum/ForumCreatePage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined) {
-        loginModalOn();
-        return;
-      }
-      next();
-    },
-  },
-  {
-    path: '/forum/:id',
-    name: 'ForumUpdate',
-    component: () => import('@/views/forum/ForumUpdatePage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined) {
-        loginModalOn();
-        return;
-      }
-      next();
-    },
-  },
+  // 포럼 관련
   {
     path: '/forum',
     name: 'Forum',
-    component: () => import('@/views/forum/ForumPage.vue'),
+    component: () => import('@/views/forum/ForumBoardPage.vue'),
   },
   {
     path: '/forum-detail/:id',
@@ -108,9 +86,22 @@ const routes = [
     component: () => import('@/views/forum/ForumDetailPage.vue'),
   },
   {
+    path: '/forum/create',
+    name: 'ForumCreate',
+    component: () => import('@/views/forum/ForumCreatePage.vue'),
+    beforeEnter: isLogined,
+  },
+  {
+    path: '/forum/:id',
+    name: 'ForumUpdate',
+    component: () => import('@/views/forum/ForumUpdatePage.vue'),
+    beforeEnter: isLogined,
+  },
+  // 이벤트 관련
+  {
     path: '/event',
     name: 'Event',
-    component: () => import('@/views/event/EventPage.vue'),
+    component: () => import('@/views/event/EventBoardPage.vue'),
   },
   {
     path: '/event-detail/:id',
@@ -118,34 +109,21 @@ const routes = [
     component: () => import('@/views/event/EventDetailPage.vue'),
   },
   {
-    path: '/event-update/:id',
+    path: '/event/create',
+    name: 'EventCreate',
+    component: () => import('@/views/event/EventCreatePage.vue'),
+    beforeEnter: isAdmin,
+  },
+  {
+    path: '/event/:id',
     name: 'EventUpdate',
     component: () => import('@/views/event/EventUpdatePage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined && Number(store.state.id) <= 5) {
-        alert('관리자만 가능합니다');
-        next('/main');
-        return;
-      }
-      next();
-    },
+    beforeEnter: isAdmin,
   },
-  {
-    path: '/event-registration/',
-    name: 'EventRegistration',
-    component: () => import('@/views/event/EventRegistrationPage.vue'),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isLogined && Number(store.state.id) <= 5) {
-        alert('관리자만 가능합니다');
-        next('/main');
-        return;
-      }
-      next();
-    },
-  },
+  // Not Found Page
   {
     path: '*',
-    component: () => import('@/views/common/NotFoundPage.vue'),
+    component: () => import('@/views/NotFoundPage.vue'),
   },
 ];
 

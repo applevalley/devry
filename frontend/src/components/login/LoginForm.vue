@@ -121,7 +121,7 @@ export default {
         this.offModal();
         location.reload();
       } catch (error) {
-        console.log(error);
+        alert(error);
         this.$q.loading.hide();
         alert('이메일이나 비밀번호를 다시 확인해주세요.');
       }

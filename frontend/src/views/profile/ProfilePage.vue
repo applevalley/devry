@@ -4,11 +4,19 @@
     <div class="row  justify-center full-width"></div>
     <!-- 개인 정보가 담긴 배너 -->
     <div class="row justify-center full-width q-my-md">
-      <header-banner :info="headerInfo" v-if="loaded"></header-banner>
+      <header-banner
+        :info="headerInfo"
+        v-if="loaded"
+        class="banner-border"
+      ></header-banner>
     </div>
     <div class="row justify-center full-width q-my-md">
       <!-- 커뮤니티 활동 성향 관련 정보가 담긴 배너 -->
-      <side-banner :info="sideInfo" v-if="loaded"></side-banner>
+      <side-banner
+        :info="sideInfo"
+        v-if="loaded"
+        class="banner-border"
+      ></side-banner>
       <!-- 글과 댓글 정보가 담긴 배너 -->
       <post-banner :info="postInfo" v-if="loaded"></post-banner>
     </div>
@@ -20,9 +28,7 @@ import HeaderBanner from '@/components/profile/HeaderBanner';
 import SideBanner from '@/components/profile/SideBanner';
 import PostBanner from '@/components/profile/PostBanner';
 import { getProfile } from '@/api/profile.js';
-// import { testCase } from '@/dummy/Profile';
 export default {
-  // 가짜 데이터
   data() {
     return {
       headerInfo: {},
@@ -100,7 +106,7 @@ export default {
         };
         this.loaded = true;
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -117,4 +123,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.banner-border {
+  border: 1px solid #cccccc;
+}
+</style>

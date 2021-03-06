@@ -117,7 +117,7 @@ export default {
         const { data } = await getRecomments(this.ans_id);
         this.recommentList = data;
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async postRecomment(e) {
@@ -135,7 +135,7 @@ export default {
         this.newComment = '';
         this.reloadRecomment();
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async updateRecomment(e, anssmall_pk, index, content) {
@@ -150,7 +150,7 @@ export default {
         this.reloadRecomment();
         this.closeEditor(index);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async deleteAnsRecomment(anssmall_pk) {
@@ -158,7 +158,7 @@ export default {
         await deleteRecomment(anssmall_pk);
         this.reloadRecomment();
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
   },

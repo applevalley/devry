@@ -1,9 +1,8 @@
-import { instance } from '@/api';
-import { setInterceptors } from '@/api/common/interceptors';
+import { instance, instanceAuth } from '@/api';
 
 // forum 글 등록하기
 function createForumItem(postData) {
-  return setInterceptors(instance).post('forum/', postData);
+  return instanceAuth.post('forum/', postData);
 }
 
 // forum 특정 글 불러오기
@@ -12,7 +11,7 @@ function loadForumItem(forum_pk) {
 }
 // forum 글 수정하기
 function updateForumItem(postId, postData) {
-  return setInterceptors(instance).put(`forum/${postId}/`, postData);
+  return instanceAuth.put(`forum/${postId}/`, postData);
 }
 
 // forum  글 삭제하기
@@ -25,8 +24,9 @@ function toggleForumLike(forum_pk) {
   return instance.post(`forum_like/${forum_pk}/`);
 }
 
+// forum 글 Pinned 토글하기
 function togglePinned(forum_pk) {
-  return setInterceptors(instance).post(`forum_pinned/${forum_pk}/`);
+  return instanceAuth.post(`forum_pinned/${forum_pk}/`);
 }
 
 // forum 댓글 목록 불러오기

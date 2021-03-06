@@ -66,7 +66,7 @@ export default {
         });
         location.reload();
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

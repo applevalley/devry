@@ -1,11 +1,5 @@
 <template>
   <div class="row col-12">
-    <!-- <div v-if="writerStatus" class="row col-12">
-      <div class="row col-11"></div>
-      <div class="row col-1 q-mt-lg">
-        <q-btn color="primary" label="글 수정" size="sm" />
-      </div>
-    </div> -->
     <div class="row col-12">
       <div class="row col-2 q-mt-lg">
         <div class="row col-9"></div>
@@ -25,8 +19,6 @@
       </div>
     </div>
     <div class="row col-12">
-      <!-- <div class="row col-12" v-if="bigComments.length"> -->
-      <!-- <qna-big-comment></qna-big-comment> -->
       <qna-big-comment :info="bigComments"></qna-big-comment>
     </div>
     <div class="row col-12">
@@ -60,12 +52,6 @@ export default {
     goToProfile() {
       this.$router.push({ name: 'Profile' });
     },
-    // checkWriter() {
-    //   // 글 작성자 판별
-    //   if (this.$store.state.id === this.contents.user.id) {
-    //     this.writerStatus = true;
-    //   }
-    // },
   },
   computed: {
     status() {
@@ -115,7 +101,7 @@ export default {
       const { data } = await loadQnaItem(index);
       this.contents = data;
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
     this.$store.commit('offLeft');
   },

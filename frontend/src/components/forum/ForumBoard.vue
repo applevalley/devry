@@ -110,7 +110,7 @@ export default {
         }
         this.loaded = true;
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

@@ -127,7 +127,7 @@ export default {
           this.content = data.content;
           this.ref_tags = data.ref_tags;
         } catch (error) {
-          console.log(error);
+          alert(error);
         } finally {
           this.$q.loading.hide();
         }
@@ -141,7 +141,7 @@ export default {
           this.ref_tags = loadedData.ref_tags;
           this.thumbnail = loadedData.thumbnail;
         } catch (error) {
-          console.log(error);
+          alert(error);
         } finally {
           this.$q.loading.hide();
         }
@@ -217,7 +217,7 @@ export default {
         // 이전 페이지로 이동
         this.$router.go(-1);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -239,7 +239,7 @@ export default {
         // 이전 페이지로 이동
         this.$router.go(-1);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -254,7 +254,7 @@ export default {
         // 이전 페이지로 이동
         this.$router.go(-1);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -285,7 +285,7 @@ export default {
         // 이전 페이지로 이동
         this.$router.go(-1);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -316,7 +316,7 @@ export default {
         // 이전 페이지로 이동
         this.$router.go(-1);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }
@@ -331,7 +331,7 @@ export default {
         // 이전 페이지로 이동
         this.$router.go(-1);
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

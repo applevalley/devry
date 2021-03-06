@@ -6,7 +6,7 @@
     behavior="desktop"
     bordered
     overlay
-    width="240"
+    :width="240"
     persistent
   >
     <q-tabs
@@ -39,9 +39,7 @@
           <span
             v-for="tag in $store.getters.getMyTags"
             :key="tag"
-            class="q-mb-sm q-mr-xs q-pa-sm "
-            :style="{ 'background-color': '#ECEFF1' }"
-            style="font-size:10pt; border-radius:5pt"
+            class="q-mb-sm q-mr-xs q-pa-sm my-tags-element"
             >#{{ tag }}</span
           >
         </div>
@@ -76,5 +74,10 @@ export default {
 }
 .my-tags {
   padding-left: 48px;
+}
+.my-tags-element {
+  font-size: 10pt;
+  border-radius: 5pt;
+  background-color: #dddddd;
 }
 </style>

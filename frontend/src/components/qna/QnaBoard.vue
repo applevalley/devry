@@ -121,7 +121,7 @@ export default {
         this.max = Math.ceil(data.length / 10);
         this.loaded = true;
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

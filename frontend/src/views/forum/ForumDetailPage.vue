@@ -88,7 +88,7 @@ export default {
       this.comments = this.contents.comment_set;
       this.loaded = true;
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
     this.$store.commit('offLeft');
   },

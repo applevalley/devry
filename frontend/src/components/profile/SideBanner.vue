@@ -1,7 +1,8 @@
 <template>
   <q-card class="col-7">
     <div class="row full-width">
-      <div class="row col-6  ">
+      <!-- chart.js를 이용해 태그로 보는 포스팅 횟수 출력 -->
+      <div class="row col-6 ">
         <q-card-section class="row justify-center full-width">
           <div class=" text-bold q-mb-md text-center full-width">
             태그로 보는 포스팅 횟수
@@ -17,6 +18,8 @@
           </span>
         </q-card-section>
       </div>
+
+      <!-- My Tags, My Skills, My Projects, My History -->
       <div class="row col-6 items-start">
         <div class="row items-start col-12">
           <div class="col-6">
@@ -48,8 +51,7 @@
                 <span
                   v-for="skill in info.skills"
                   :key="skill"
-                  class="q-mb-sm q-mr-xs q-pa-sm"
-                  style="background-color: #F0ECEC; font-size:10pt; border-radius:5pt "
+                  class="q-mb-sm q-mr-xs q-pa-sm my-grey-background"
                   >{{ skill }}</span
                 >
                 <span v-if="info.skills.length == 0" class="text-grey-5">
@@ -73,8 +75,7 @@
                   <q-item
                     clickable
                     v-ripple
-                    style="background-color:#F0ECEC; border-radius:6px; height:20px"
-                    class="q-mb-sm full-width"
+                    class="q-mb-sm full-width my-grey-background"
                     v-for="project in info.projects"
                     :key="project.project_name"
                   >
@@ -222,19 +223,6 @@ export default {
       loaded: false,
     };
   },
-  // watch: {
-  //   info() {
-  //     this.tagNames = Object.keys(this.info.tags);
-  //     this.tagColors = colorListMapper(this.tagNames, 0.5);
-  //     this.tagBoldColors = colorListMapper(this.tagNames, 1);
-  //     this.tagLength = this.tagNames.length;
-  //     this.tagCounts = Object.values(this.info.tags);
-  //     this.chartData.labels = this.tagNames;
-  //     this.chartData.datasets[0].backgroundColor = this.tagBoldColors;
-  //     this.chartData.datasets[0].data = this.tagCounts;
-  //     this.loaded = true;
-  //   },
-  // },
   created() {
     this.tagNames = Object.keys(this.info.tags);
     this.tagColors = colorListMapper(this.info.myTags, 0.5);
@@ -261,5 +249,10 @@ a:visited {
 a:hover {
   color: #08458c;
   text-decoration: none;
+}
+.my-grey-background {
+  background-color: #dddddd;
+  font-size: 10pt;
+  border-radius: 5pt;
 }
 </style>

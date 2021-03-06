@@ -92,8 +92,6 @@
 </template>
 
 <script>
-// import { toggleForumLike, toggleforumBookmark } from '@/api/forum';
-
 import { colorSoloMapper } from '@/utils/tagColorMapper';
 export default {
   props: {

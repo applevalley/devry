@@ -1,23 +1,25 @@
-import { board } from '@/api';
+import { instance, instanceAuth } from '@/api';
+
+// QnA 게시판에 들어올 QnA 리스트 제공
 function getQnaList() {
-  return board.get(`qna`);
+  return instance.get(`board/qna`);
 }
-
+// 이벤트 게시판에 들어올 일반 이벤트 리스트 제공
 function getEventList() {
-  return board.get(`event`);
+  return instance.get(`board/event`);
 }
-
+// 이벤트 게시판에 들어올 메인 이벤트 리스트 제공
 function getMainEventList() {
-  return board.get(`event/main`);
+  return instance.get(`board/event/main`);
 }
 
-// forum board - 최신순 리스트 불러오기
+// 포럼 게시판에 들어올 포럼 리스트 제공 - 최신순
 function loadForumTime() {
-  return board.get(`forumno/`);
+  return instance.get(`board/forumno/`);
 }
-// forum board - 피드 리스트 불러오기
+// 포럼 게시판에 들어올 포럼 리스트 제공 - 피드
 function loadForumFeed() {
-  return board.get(`forum/`);
+  return instanceAuth.get(`board/forum/`);
 }
 
 export {

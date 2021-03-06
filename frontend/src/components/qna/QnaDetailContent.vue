@@ -116,7 +116,7 @@ export default {
       try {
         this.comments = await getSmallComments(this.info.post_id);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     async deleteQna() {
@@ -127,7 +127,7 @@ export default {
         // 이동 시킬 페이지 적어주기(QnA 게시판으로 이동)
         this.$router.push({ path: '/qna' });
       } catch (error) {
-        console.log(error);
+        alert(error);
       } finally {
         this.$q.loading.hide();
       }

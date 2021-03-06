@@ -5,11 +5,7 @@
       <div class="row full-width q-pb-sm justify-center q-px-sm">
         <!-- 이벤트 썸네일 이미지 -->
         <q-img
-          :src="
-            thumnail
-              ? this.thumnail
-              : require('@/assets/basic_image.png')
-          "
+          :src="thumnail ? this.thumnail : require('@/assets/basic_image.png')"
           spinner-color="white"
           class="rounded-borders col-6"
         >
@@ -170,10 +166,7 @@
 
 <script>
 import { getEvent, toggleEventBookmark } from '@/api/event';
-import {
-  colorSoloMapper,
-  // matchingColorSoloMapper,
-} from '@/utils/tagColorMapper';
+import { colorSoloMapper } from '@/utils/tagColorMapper';
 
 export default {
   data() {
@@ -206,7 +199,7 @@ export default {
     updateEvent() {
       const post_id = this.$route.params.id;
       // 이벤트 등록 수정하기 페이지로 이동
-      this.$router.push({ path: `/event-update/${post_id}`});
+      this.$router.push({ path: `/event/${post_id}` });
     },
     // 북마크 토글하기
     async checkbookmarked() {
@@ -226,7 +219,7 @@ export default {
           this.bookmark_num = this.bookmark_num - 1;
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     },
     register() {
@@ -273,7 +266,7 @@ export default {
       const etime = etimes[0].split(':');
       this.end_time = etime[0] + '시 ' + etime[1] + '분';
     } catch (error) {
-      console.log(error);
+      alert(error);
       // alert('에러가 발생했습니다.)
     } finally {
       this.$q.loading.hide();
